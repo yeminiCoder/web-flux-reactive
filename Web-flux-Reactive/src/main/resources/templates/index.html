@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Societe</title>
+
+    <link type="text/css" rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        div.smoothie-chart-tooltip {
+            background: #444;
+            padding: 1em;
+            margin-top: 20px;
+            font-family: consolas;
+            color: white;
+            font-size: 10px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Societes: </h1>
+        <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Price</th>
+                        </tr>
+                        <div class="table-body">
+                            <!--/*@thymesVar id="societes" type="java.util.List<com.info.org.sid.entities.Societe>"*/-->
+                            <tr th:each="s:${societes}">
+                                <td th:text="${s.id}"></td>
+                                <td th:text="${s.name}"></td>
+                                <td th:text="${s.price}"></td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" th:attr="onClick=|onConnected('${s.id}')|">
+                                        Transactions
+                                    </button>
+                                </td>
+                            </tr>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <canvas id="mycanvas" width="600" height="300"></canvas>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/smoothiechart.js}" type="text/javascript"></script>
+<script th:src="@{/js/app.js}" type="text/javascript"></script>
+</body>
+</html>
